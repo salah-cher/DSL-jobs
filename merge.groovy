@@ -16,4 +16,14 @@ job('DDV_Merge_DQA') {
             }
         }
     }
+    publishers {
+        git {
+            pushOnlyIfSuccess()
+            tag('origin', 'foo-$BUILD_NUMBER') {
+                message('Release $BUILD_NUMBER')
+                create()
+            }
+            pushMerge(true)
+        }
+    }
 }
